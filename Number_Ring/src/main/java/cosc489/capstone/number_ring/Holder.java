@@ -27,20 +27,24 @@ public class Holder {
             current.setPrevious(temp);
             temp.setNext(current);
             temp.setPrevious(current);
+            current = current.getPrevious();
             size++;
         } else if (size == 2) {
             current.setPrevious(temp);
             current.getNext().setNext(temp);
             temp.setNext(current);
             temp.setPrevious(current.getNext());
+            current = current.getPrevious();
             size++;
         } else {
             current.getPrevious().setNext(temp);
             temp.setPrevious(current.getPrevious());
             current.setPrevious(temp);
             temp.setNext(current);
+            current = current.getPrevious();
             size++;
         }
+        temp = null;
     }
 
     public void append(int data) {
@@ -53,46 +57,46 @@ public class Holder {
             current.setPrevious(temp);
             temp.setNext(current);
             temp.setPrevious(current);
+            current = current.getNext();
             size++;
         } else if (size == 2) {
             current.setNext(temp);
             temp.setPrevious(current);
             current.getPrevious().setPrevious(temp);
             temp.setNext(current.getPrevious());
+            current = current.getNext();
             size++;
         } else {
             current.getNext().setPrevious(temp);
             temp.setNext(current.getNext());
             temp.setPrevious(current);
             current.setNext(temp);
+            current = current.getNext();
             size++;
         }
+        temp = null;
     }
 
     public void delete() {
+        Node temp;
         if (size == 1) {
             current = null;
             size--;
         } else if (size > 1) {
             current.getNext().setPrevious(current.getPrevious());
             current.getPrevious().setNext(current.getNext());
-            Node temp = current.getNext();
+            temp = current.getNext();
             current = null;
             current = temp;
             size--;
         }
+        temp = null;
     }
 
     public void deleteAll() {
         System.out.printf("\nDelete All Values:\n");
         while (size != 0) {
             delete();
-        }
-    }
-
-    public void sortRing() {
-        if (size > 2) {
-
         }
     }
 
@@ -136,9 +140,9 @@ public class Holder {
             }
             //System.out.println("\ntemp: " + temp);
             if (count < 0) {
-                jump((count - temp) * -1);
+                jump(((count - temp) - 1) * -1);
             } else {
-                jump((count + temp) * -1);
+                jump(((count + temp) + 1) * -1);
             }
             //System.out.printf("\nBefore Delete: ");
             //printRingClockwise();
@@ -155,12 +159,54 @@ public class Holder {
         }
     }
 
+    public void sort() {
+        Node temp;
+        int kept, pacer = size, holder = current.getData();
+        if (size > 2) {
+            for (int i = 0; i < size; i++) {
+                current = current.getNext();
+                temp = current;
+                for (int j = 0; j < pacer; j++) {
+                    temp = temp.getNext();
+                    //System.out.printf("\n");
+                    //print();
+                    //System.out.printf("Current: %-5d\tTemp: %-5d\tHolder: %-5d\tPass-i: %-5d\tPass-t: %-5d", current.getData(), temp.getData(), pacer, i, j);
+                    if (current.getData() > temp.getData()) {
+                        kept = current.getData();
+                        current.setData(temp.getData());
+                        temp.setData(kept);
+                        //System.out.println("\nswap");
+                    }
+                }
+                pacer--;
+            }
+            //locate saved current (holder)
+            temp = current.getPrevious();
+            for (int i = 0; i < size; i++) {
+                temp = temp.getNext();
+                if (temp.getData() == holder) {
+                    current = temp;
+                }
+            }
+        }
+        temp = null;
+    }
+
     public Integer getCurrentData() {
         return current.getData();
     }
 
     public void printCurrent() {
         System.out.printf("\nCurrent Node: %d\n", getCurrentData());
+    }
+
+    public void print() {
+        System.out.printf("\n");
+        for (int i = 0; i < size; i++) {
+            System.out.printf("%d ", getCurrentData());
+            jump(1);
+        }
+        System.out.printf("\n");
     }
 
     public void printRingClockwise() {
