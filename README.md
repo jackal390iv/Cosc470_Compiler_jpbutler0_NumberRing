@@ -1,4 +1,4 @@
-# Cosc470_Compiler_jpbutler0_NumberRing
+# Cosc489_PT_2158_jpbutler0
 Jonathan Butler
 
 This Project is designed to create a circular linked list of integers and perform basic linked list functions; 
