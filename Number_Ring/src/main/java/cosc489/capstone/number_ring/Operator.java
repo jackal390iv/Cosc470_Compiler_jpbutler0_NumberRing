@@ -13,10 +13,15 @@ public class Operator {
     private static Holder holder = new Holder();
 
     public static void main(String[] args) throws Exception {
+        run();
         //test1();
         //test2();
         //test3();
-        test4();
+        //test4();
+    }
+    
+    public static void run() {
+        holder.run();
     }
 
     /**

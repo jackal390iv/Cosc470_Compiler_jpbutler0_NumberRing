@@ -4,6 +4,10 @@
  */
 package cosc489.capstone.number_ring;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  *
  * @author Jonathan Butler <https://github.com/jackal390iv>
@@ -12,9 +16,121 @@ public class Holder {
 
     private Node current = null;
     private Integer size = 0;
+    private ArrayList<String> file = new ArrayList<String>();
 
     public Holder() {
 
+    }
+
+    public void run() {
+        read();
+        fileOperations();
+    }
+
+    private void read() {
+        File dummy;
+        String holder, kept;
+        Scanner scan;
+        try {
+            //create dummy file
+            dummy = new File("");
+            //set holder to file's path
+            holder = dummy.getAbsolutePath();
+            //System.out.println("Holder : " + holder);
+            //move holder's path to the directory above source code folder
+            holder = holder.substring(0, holder.lastIndexOf(File.separator));
+            //System.out.println("Holder : " + holder);
+            //move holder's path to the directory above project folder
+            holder = holder.substring(0, holder.lastIndexOf(File.separator));
+            //System.out.println("Holder : " + holder);
+
+            scan = new Scanner(new File(holder + "/COSC489_PT_2158_Input.txt"));
+            while (scan.hasNextLine()) {
+                kept = scan.nextLine();
+                if (!kept.isEmpty()) {
+                    file.add(kept);
+                }
+            }
+
+        } catch (Exception ex) {
+            System.out.println("I'm sorry, but an error has occured durring file read; please try again.");
+            System.out.println("Cause: " + ex.getCause());
+            System.out.println("Message: " + ex.getMessage());
+            System.out.println("Local Message: " + ex.getLocalizedMessage());
+            //ex.printStackTrace();*/
+            System.exit(0);
+        }
+    }
+
+    private void fileOperations() {
+        String holder;
+        int temp;
+        for (int i = 0; i < file.size(); i++) {
+            holder = file.get(i);
+            if (holder.contains("Initialize the ring with")) {
+                initializeRing(file.get(i + 1));
+                i++;
+                //System.out.println("\nInitialize The Ring With:\n" + file.get(i));System.out.println("\n");
+            }
+            if (holder.contains("insert")) {
+                temp = Integer.parseInt(holder.substring(holder.lastIndexOf(" ") + 1));
+                //System.out.println("Insert: " + temp);
+                insert(temp);
+                //print();System.out.println("\n");
+            }
+            if (holder.contains("append")) {
+                temp = Integer.parseInt(holder.substring(holder.lastIndexOf(" ") + 1));
+                //System.out.println("Append: " + temp);
+                append(temp);
+                //print();System.out.println("\n");
+            }
+            if (holder.contains("jump")) {
+                temp = Integer.parseInt(holder.substring(holder.lastIndexOf(" ") + 1));
+                //System.out.println("Jump: " + temp);
+                jump(temp);
+                //print();System.out.println("\n");
+            }
+            if (holder.contains("move")) {
+                temp = Integer.parseInt(holder.substring(holder.lastIndexOf(" ") + 1));
+                //System.out.println("Move: " + temp);
+                move(temp);
+                //print();System.out.println("\n");
+            }
+            if (holder.contains("sort")) {
+                //System.out.println("Sort: ");
+                sort();
+                //print();System.out.println("\n");
+            }
+            if (holder.contains("delete")) {
+                //System.out.println("Delete: ");
+                delete();
+                //print();System.out.println("\n");
+            }
+            if (holder.contains("print")) {
+                print();
+            }
+        }
+    }
+
+    private void initializeRing(String list) {
+        //System.out.println(list);
+        int temp;
+        while (list.contains(" ")) {
+            temp = Integer.parseInt(list.substring(list.lastIndexOf(" ") + 1));
+            //System.out.println("Temp: "+temp);
+            insert(temp);
+            list = list.substring(0, list.lastIndexOf(" "));
+            //System.out.println("List: "+list);
+        }
+        insert(Integer.parseInt(list));
+        //print();
+    }
+
+    public void printFile() {
+        System.out.println("Printing File:\n");
+        for (String temp : file) {
+            System.out.println(temp);
+        }
     }
 
     public void insert(int data) {
