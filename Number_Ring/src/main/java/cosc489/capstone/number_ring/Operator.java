@@ -106,11 +106,11 @@ public class Operator {
      * tests move function
      */
     public static void test3() {
-        holder.append(1); 
-        holder.jump(1);
         holder.append(2); 
         holder.jump(1);
         holder.append(3); 
+        holder.jump(1);
+        holder.append(1); 
         holder.jump(1);
         holder.append(4);
         holder.jump(1);
@@ -119,6 +119,27 @@ public class Operator {
         holder.append(6);
         holder.jump(2);
         
+        System.out.printf("\nOriginal: ");
+        holder.printRingClockwise();//prints ring clockwise
+        
+        holder.jump(2);
+        
+        System.out.printf("\nMove To Issue: ");
+        holder.printRingClockwise();//prints ring clockwise
+        
+        //holder.move(3);
+        
+        holder.move(9);
+        
+        //holder.move(15);
+        
+        //holder.move(-2);
+        
+        //holder.move(-8);
+        
+        //holder.move(-14);
+        
+        System.out.printf("\nIssue Moved: ");
         holder.printRingClockwise();//prints ring clockwise
     }
     
