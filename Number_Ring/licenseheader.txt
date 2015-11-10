@@ -1,0 +1,8 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Class: COSC 489
+${licensePrefix}Project: Capstone
+<#if licenseLast??>
+${licenseLast}
+</#if>
