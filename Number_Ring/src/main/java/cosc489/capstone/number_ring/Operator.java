@@ -5,6 +5,9 @@
 package cosc489.capstone.number_ring;
 
 /**
+ * This class is simply the project initializer and tester; the 'run()' method
+ * initializes the programs main function; the tester methods are explained per
+ * unit description
  *
  * @author Jonathan Butler <https://github.com/jackal390iv>
  */
@@ -19,7 +22,10 @@ public class Operator {
         //test3();
         //test4();
     }
-    
+
+    /**
+     * Initializes projects main function
+     */
     public static void run() {
         holder.run();
     }

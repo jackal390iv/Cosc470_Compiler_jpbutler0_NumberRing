@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
+ * This class controls and performs all operations that are associated with the
+ * Node class
  *
  * @author Jonathan Butler <https://github.com/jackal390iv>
  */
@@ -18,15 +20,25 @@ public class Holder {
     private Integer size = 0;
     private ArrayList<String> file = new ArrayList<String>();
 
+    /**
+     * Constructor for Holder class
+     */
     public Holder() {
 
     }
 
+    /**
+     * Runs programs primary function; being reading the text file, and
+     * performing the operations listed
+     */
     public void run() {
         read();
         fileOperations();
     }
 
+    /**
+     * Reads the text file and stores it within the ArrayList 'file'
+     */
     private void read() {
         File dummy;
         String holder, kept;
@@ -62,6 +74,9 @@ public class Holder {
         }
     }
 
+    /**
+     * Reads the ArrayList 'file' and performs the required operations listed
+     */
     private void fileOperations() {
         String holder;
         int temp;
@@ -112,6 +127,11 @@ public class Holder {
         }
     }
 
+    /**
+     * Creates the initial ring based on file input
+     *
+     * @param list
+     */
     private void initializeRing(String list) {
         //System.out.println(list);
         int temp;
@@ -126,6 +146,10 @@ public class Holder {
         //print();
     }
 
+    /**
+     * Prints the contents of the text file; which has been stored in the
+     * ArrayList 'file'
+     */
     public void printFile() {
         System.out.println("Printing File:\n");
         for (String temp : file) {
@@ -133,6 +157,12 @@ public class Holder {
         }
     }
 
+    /**
+     * Inserts new node into the ring behind the currently selected Node; the
+     * new Node is then designated as current
+     *
+     * @param data
+     */
     public void insert(int data) {
         Node temp = new Node(data);
         if (size == 0) {
@@ -163,6 +193,12 @@ public class Holder {
         temp = null;
     }
 
+    /**
+     * Appends new node into the ring in front of the currently selected Node;
+     * the new Node is then designated as current
+     *
+     * @param data
+     */
     public void append(int data) {
         Node temp = new Node(data);
         if (size == 0) {
@@ -193,6 +229,9 @@ public class Holder {
         temp = null;
     }
 
+    /**
+     * Deletes the current node; the next Node is then designated as current
+     */
     public void delete() {
         Node temp;
         if (size == 1) {
@@ -209,6 +248,9 @@ public class Holder {
         temp = null;
     }
 
+    /**
+     * Deletes all Nodes
+     */
     public void deleteAll() {
         System.out.printf("\nDelete All Values:\n");
         while (size != 0) {
@@ -216,6 +258,11 @@ public class Holder {
         }
     }
 
+    /**
+     * Moves current pointer (counter) a designated number of spaces
+     *
+     * @param count
+     */
     public void jump(int count) {
         boolean negative = false;
         if (count < 0) {
@@ -233,6 +280,12 @@ public class Holder {
         }
     }
 
+    /**
+     * Moves current pointer (counter) a designated number of spaces, copies
+     * current Node to that space, then deletes irrelevant copy
+     *
+     * @param count
+     */
     public void move(int count) {
         if (size > 2) {
             //System.out.println("\ncount: " + count);
@@ -275,6 +328,9 @@ public class Holder {
         }
     }
 
+    /**
+     * Sorts all Nodes numerically by Node data
+     */
     public void sort() {
         Node temp;
         int kept, pacer = size, holder = current.getData();
@@ -308,14 +364,25 @@ public class Holder {
         temp = null;
     }
 
+    /**
+     * returns current Node data
+     *
+     * @return
+     */
     public Integer getCurrentData() {
         return current.getData();
     }
 
+    /**
+     * Prints current Node data
+     */
     public void printCurrent() {
         System.out.printf("\nCurrent Node: %d\n", getCurrentData());
     }
 
+    /**
+     * prints all Nodes clockwise; without heading
+     */
     public void print() {
         System.out.printf("\n");
         for (int i = 0; i < size; i++) {
@@ -325,6 +392,9 @@ public class Holder {
         System.out.printf("\n");
     }
 
+    /**
+     * prints all Nodes clockwise; with heading
+     */
     public void printRingClockwise() {
         System.out.printf("\nPrinting Ring Clockwise:\n");
         for (int i = 0; i < size; i++) {
@@ -334,6 +404,9 @@ public class Holder {
         System.out.printf("\n");
     }
 
+    /**
+     * prints all Nodes counter-clockwise; with heading
+     */
     public void printRingCounterClockwise() {
         System.out.printf("\nPrinting Ring Counter-Clockwise:\n");
         for (int i = 0; i < size; i++) {
